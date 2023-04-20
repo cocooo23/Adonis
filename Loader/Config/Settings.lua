@@ -277,6 +277,51 @@ settings.CommandCooldowns = {
 ]]	
 }
 
+settings.FunCommands = true				-- Are fun commands enabled?
+settings.PlayerCommands = true			-- Are player-level utility commands enabled?
+settings.CommandFeedback = false		-- Should players be notified when commands with non-obvious effects are run on them?
+settings.CrossServerCommands = true		-- Are commands which affect more than one server enabled?
+settings.ChatCommands = true			-- If false you will not be able to run commands via the chat; Instead, you MUST use the console or you will be unable to run commands
+settings.CreatorPowers = true			-- Gives me creator-level admin; This is strictly used for debugging; I can't debug without full access to the script
+settings.CodeExecution = true			-- Enables the use of code execution in Adonis; Scripting related (such as :s) and a few other commands require this
+settings.SilentCommandDenials = false	-- If true, there will be no differences between the error messages shown when a user enters an invalid command and when they have insufficient permissions for the command
+settings.OverrideChatCallbacks = true		-- If the TextChatService ShouldDeliverCallbacks of all channels are overridden by Adonis on load. Required for muting
+
+settings.BanMessage = "Banned"				-- Message shown to banned users upon kick
+settings.LockMessage = "Not Whitelisted"	-- Message shown to people when they are kicked while the game is :slocked
+settings.SystemTitle = "System Message"		-- Title to display in :sm and :bc
+
+settings.MaxLogs = 5000			-- Maximum logs to save before deleting the oldest
+settings.SaveCommandLogs = true	-- If command logs are saved to the datastores
+settings.Notification = true	-- Whether or not to show the "You're an admin" and "Updated" notifications
+settings.SongHint = true		-- Display a hint with the current song name and ID when a song is played via :music
+settings.TopBarShift = false	-- By default hints and notifications will appear from the top edge of the window. Set this to true if you don't want hints/notifications to appear in that region.
+settings.Messages = {}			-- A list of notification messages to show HeadAdmins and above on join
+settings.AutoClean = false		-- Will auto clean workspace of things like hats and tools
+settings.AutoCleanDelay = 60	-- Time between auto cleans
+settings.AutoBackup = false 	-- Run :backupmap automatically when the server starts. To restore the map, run :restoremap
+
+settings.Console = true				-- Whether the command console is enabled
+settings.Console_AdminsOnly = false -- If true, only admins will be able to access the console
+
+settings.HelpSystem = true		-- Allows players to call admins for help using !help
+settings.HelpButton = true		-- Shows a little help button in the bottom right corner.
+settings.HelpButtonImage = "rbxassetid://357249130" -- Sets the image used for the Adonis help button above.
+
+
+--------------------
+-- DONOR SETTINGS --
+--------------------
+
+settings.DonorCapes = true 		-- Donors get to show off their capes; Not disruptive :)
+settings.DonorCommands = true	-- Show your support for the script and let donors use harmless commands like !sparkles
+settings.LocalCapes = false	 	-- Makes Donor capes local so only the donors see their cape [All players can still disable capes locally]
+
+
+--------------------------
+-- HTTP/TRELLO SETTINGS --
+--------------------------
+
 settings.HttpWait = 60					-- How long things that use the HttpService will wait before updating again
 settings.Trello_Enabled = false			-- Are the Trello features enabled?
 settings.Trello_Primary = ""			-- Primary Trello board
@@ -284,6 +329,11 @@ settings.Trello_Secondary = {}			-- Secondary Trello boards (read-only)		Format:
 settings.Trello_AppKey = ""				-- Your Trello AppKey						  	Link: https://trello.com/app-key
 settings.Trello_Token = ""				-- Trello token (DON'T SHARE WITH ANYONE!)    Link: https://trello.com/1/connect?name=Trello_API_Module&response_type=token&expires=never&scope=read,write&key=YOUR_APP_KEY_HERE
 settings.Trello_HideRanks = false		-- If true, Trello-assigned ranks won't be shown in the admins list UI (accessed via :admins)
+
+
+---------------------
+-- _G API SETTINGS --
+---------------------
 
 settings.G_API = true					-- If true, allows other server scripts to access certain functions described in the API module through _G.Adonis
 settings.G_Access = false				-- If enabled, allows other scripts to access Adonis using _G.Adonis.Access; Scripts will still be able to do things like _G.Adonis.CheckAdmin(player)
@@ -306,55 +356,27 @@ settings.Allowed_API_Calls = {
 	API_Specific = true;		-- API Specific functions
 }
 
-settings.FunCommands = true				-- Are fun commands enabled?
-settings.PlayerCommands = true			-- Are player-level utility commands enabled?
-settings.CommandFeedback = false		-- Should players be notified when commands with non-obvious effects are run on them?
-settings.CrossServerCommands = true		-- Are commands which affect more than one server enabled?
-settings.ChatCommands = true			-- If false you will not be able to run commands via the chat; Instead, you MUST use the console or you will be unable to run commands
-settings.CreatorPowers = true			-- Gives me creator-level admin; This is strictly used for debugging; I can't debug without full access to the script
-settings.CodeExecution = true			-- Enables the use of code execution in Adonis; Scripting related (such as :s) and a few other commands require this
-settings.SilentCommandDenials = false	-- If true, there will be no differences between the error messages shown when a user enters an invalid command and when they have insufficient permissions for the command
-settings.OverrideChatCallbacks = true		-- If the TextChatService ShouldDeliverCallbacks of all channels are overridden by Adonis on load. Required for muting
 
-settings.BanMessage = "Banned"				-- Message shown to banned users upon kick
-settings.LockMessage = "Not Whitelisted"	-- Message shown to people when they are kicked while the game is :slocked
-settings.SystemTitle = "System Message"		-- Title to display in :sm and :bc
+---------------------------
+-- ANTI-EXPLOIT SETTINGS --
+---------------------------
 
-settings.MaxLogs = 5000			-- Maximum logs to save before deleting the oldest
-settings.SaveCommandLogs = true	-- If command logs are saved to the datastores
-settings.Notification = true	-- Whether or not to show the "You're an admin" and "Updated" notifications
-settings.SongHint = true		-- Display a hint with the current song name and ID when a song is played via :music
-settings.TopBarShift = false	-- By default hints and notifications will appear from the top edge of the window, this is achieved by offsetting them by -35 into the transparent region where Roblox buttons menu/chat/leaderstat buttons are. Set this to true if you don't want hints/notifications to appear in that region.
-settings.Messages = {}			-- A list of notification messages to show HeadAdmins and above on join
-settings.AutoClean = false		-- Will auto clean workspace of things like hats and tools
-settings.AutoCleanDelay = 60	-- Time between auto cleans
-settings.AutoBackup = false 	-- Run :backupmap automatically when the server starts. To restore the map, run :restoremap
+--// IF YOU EXPERIENCE ISSUES WITH FALSE POSITIVES/RANDOM KICKING/CRASHING DISABLE ALL OF THESE!
+settings.Detection = true			-- (Default: true) 	If true: enables built-in anti-exploit detections that do not have their own settings.
+settings.CheckClients = true		-- (Default: true) 	Checks clients every minute or two to make sure they are still active.
 
-settings.Console = true				-- Whether the command console is enabled
-settings.Console_AdminsOnly = false -- If true, only admins will be able to access the console
+settings.ExploitNotifications = true        -- (Default: true)	Notify all moderators and higher-ups when a player is kicked or crashed from the AntiExploit.
+settings.CharacterCheckLogs = false			-- (Default: false)	If the character checks appear in exploit logs and exploit notifications.
+settings.AntiNoclip = false					-- (Default: false)	Attempts to detect noclipping and kills the player if found.
+settings.AntiRootJointDeletion = false		-- (Default: false)	Attempts to detect paranoid and kills the player if found.
+settings.AntiMultiTool = false 				-- (Default: false)	Prevents multitool and because of that many other exploits.
+settings.AntiGod = false 					-- (Default: false)	If a player does not respawn when they should have they get respawned.
+-- settings.AntiHumanoidDeletion and settings.ProtectHats have been superseded Workspace.RejectCharacterDeletions.
 
-settings.HelpSystem = true		-- Allows players to call admins for help using !help
-settings.HelpButton = true		-- Shows a little help button in the bottom right corner.
-settings.HelpButtonImage = "rbxassetid://357249130" -- Sets the image used for the Adonis help button above.
-
-settings.DonorCapes = true 		-- Donors get to show off their capes; Not disruptive :)
-settings.DonorCommands = true	-- Show your support for the script and let donors use harmless commands like !sparkles
-settings.LocalCapes = false	 	-- Makes Donor capes local so only the donors see their cape [All players can still disable capes locally]
-
-settings.Detection = true			-- Attempts to detect certain known exploits
-settings.CheckClients = true		-- Checks clients every minute or two to make sure they are still active
-
-settings.ExploitNotifications = true        -- Notify all moderators and higher-ups when a player is kicked or crashed from the AntiExploit
-settings.CharacterCheckLogs = false		-- If the character checks appear in exploit logs and exploit notifications
-settings.AntiNoclip = false			-- Attempts to detect noclipping and kills the player if found
-settings.AntiRootJointDeletion = false		-- Attempts to detect paranoid and kills the player if found
-settings.AntiHumanoidDeletion = false -- (Very important) Prevents invalid humanoid deletion. Un-does the deletion and kills the player
-settings.AntiMultiTool = false -- Prevents multitool and because of that many other exploits
-settings.AntiGod = false -- If a player does not respawn when they should have they get respawned
-settings.AntiSpeed = true 			-- (Client-Sided) Attempts to detect speed exploits
-settings.AntiBuildingTools = false	-- (Client-Sided) Attempts to detect any HopperBin(s)/Building Tools added to the client
-settings.AntiClientIdle = false 		-- (Client-Sided) Kick the player if they are using an anti-idle exploit
-settings.ProtectHats = false 				-- Prevents hats from being un-welded from their characters through unnormal means
+settings.AntiSpeed = false 				-- (Default: false)	(Client-Sided) Attempts to detect speed exploits.
+settings.AntiBuildingTools = false		-- (Default: false)	(Client-Sided) Attempts to detect any HopperBin(s)/Building Tools added to the client.
+settings.AntiAntiIdle = false 			-- (Default: false)	(Client-Sided) Kick the player if they are using an anti-idle exploit. Highly useful for grinding/farming games.
+settings.ExploitGuiDetection = false 	-- (Default: false)	(Client-Sided) If any exploit GUIs are found in the CoreGui the exploiter gets kicked (If you use StarterGui:SetCore("SendNotification") with an image this will kick you).
 
 ---------------------
 -- END OF SETTINGS --
@@ -441,7 +463,7 @@ descs.SaveCommandLogs = [[ If command logs are saved to the datastores ]]
 descs.Notification = [[ Whether or not to show the "You're an admin" and "Updated" notifications ]]
 descs.CodeExecution = [[ Enables the use of code execution in Adonis; Scripting related and a few other commands require this ]]
 descs.SongHint = [[ Display a hint with the current song name and ID when a song is played via :music ]]
-descs.TopBarShift = [[ By default hints and notifs will appear from the top edge of the window, this is achieved by offsetting them by -35 into the transparent region where Roblox buttons menu/chat/leaderstat buttons are. Set this to true if you don't want hints/notifications to appear in that region. ]]
+descs.TopBarShift = [[ By default hints and notifs will appear from the top edge of the window. Set this to true if you don't want hints/notifications to appear in that region. ]]
 
 descs.Messages = [[ A list of notification messages to show HeadAdmins and above on join ]]
 
@@ -463,8 +485,8 @@ descs.HelpSystem = [[ Allows players to call admins for help using !help ]]
 descs.HelpButton = [[ Shows a little help button in the bottom right corner ]]
 descs.HelpButtonImage = [[ Change this to change the help button's image ]]
 
-descs.Detection = [[ Attempts to detect certain known exploits ]]
-descs.CheckClients = [[ Checks clients every minute or two to make sure they are still active ]]
+descs.Detection = [[ (Extremely important, makes all protection systems work) A global toggle for all the other protection settings ]]
+descs.CheckClients = [[ (Important, makes sure Adonis clients are connected to the server) Checks clients every minute or two to make sure they are still active ]]
 
 descs.SongHint = [[ Display a hint with the current song name and ID when a song is played via :music ]]
 descs.TopBarShift = [[ By default hints and notifs will appear from the top edge of the window, this is achieved by offsetting them by -35 into the transparent region where Roblox buttons menu/chat/leaderstat buttons are. Set this to true if you don't want hints/notifications to appear in that region. ]]
@@ -496,13 +518,13 @@ descs.ExploitNotifications = [[ Notify all moderators and higher-ups when a play
 descs.CharacterCheckLogs = [[If the character checks appear in exploit logs and exploit notifications]]
 descs.AntiNoclip = [[ Attempts to detect noclipping and kills the player if found ]]
 descs.AntiRootJointDeletion = [[ Attempts to detect paranoid and kills the player if found ]]
-descs.AntiHumanoidDeletion = [[ (Very important) Prevents invalid humanoid deletion. Un-does the deletion and kills the player ]]
 descs.AntiMultiTool = [[ Prevents multitool and because of that many other exploits ]]
 descs.AntiGod = [[ If a player does not respawn when they should have they get respawned ]]
+
 descs.AntiSpeed = [[ (Client-Sided) Attempts to detect speed exploits ]]
 descs.AntiBuildingTools = [[ (Client-Sided) Attempts to detect any HopperBin(s)/Building Tools added to the client ]]
-descs.AntiClientIdle = [[ (Client-Sided) Kick the player if they are using an anti-idle exploit ]]
-descs.ProtectHats = [[ Prevents hats from being un-welded from their characters through unnormal means. ]]
+descs.AntiAntiIdle = [[ (Client-Sided) Kick the player if they are using an anti-idle exploit. Highly useful for grinding/farming games ]]
+descs.ExploitGuiDetection = [[ (Client-Sided) If any exploit GUIs are found in the CoreGui the exploiter gets kicked (If you use StarterGui:SetCore("SendNotification") with an image this will kick you) ]]
 
 order = {
 	"HideScript";
@@ -606,13 +628,13 @@ order = {
 	"CharacterCheckLogs";
 	"AntiNoclip";
 	"AntiRootJointDeletion";
-	"AntiHumanoidDeletion";
 	"AntiMultiTool";
 	"AntiGod";
+	" ";
 	"AntiSpeed";
 	"AntiBuildingTools";
-	"AntiClientIdle";
-	"ProtectHats";
+	"AntiAntiIdle";
+	"ExploitGuiDetection";
 }
 
 return {Settings = settings, Descriptions = descs, Order = order}
