@@ -100,7 +100,16 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 
 	local Instance = {new = function(obj, parent) local obj = oldInstNew(obj) if parent then obj.Parent = service.UnWrap(parent) end return service and client and service.Wrap(obj, true) or obj end}
 	local Events, Threads, Wrapper, Helpers = {
-		TrackTask = function(name, func, ...)
+		TrackTask = function(name, func, errHandler, ...)
+			local overflowArgs = {...}
+			if type(errHandler) ~= "function" or (#overflowArgs == 0 and errHandler == nil) then
+				if typeof(errHandler) ~= "function" then
+					table.insert(overflowArgs, errHandler)
+				end
+				errHandler = function(err)
+					logError(err.."\n"..debug.traceback())
+				end
+			end
 			local index = (main and main.Functions and main.Functions:GetRandom()) or math.random();
 			local isThread = string.sub(name, 1, 7) == "Thread:"
 
@@ -116,7 +125,7 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 			local function taskFunc(...)
 				TrackedTasks[index] = data
 				data.Status = "Running"
-				data.Returns = {pcall(func, ...)}
+				data.Returns = {xpcall(func, errHandler, ...)}
 
 				if not data.Returns[1] then
 					data.Status = "Errored"
@@ -130,9 +139,9 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 
 			if isThread then
 				data.Thread = coroutine.create(taskFunc)
-				return coroutine.resume(data.Thread, ...) --select(2, coroutine.resume(data.Thread, ...))
+				return coroutine.resume(data.Thread, unpack(overflowArgs)) --select(2, coroutine.resume(data.Thread, ...))
 			else
-				return taskFunc(...)
+				return taskFunc(unpack(overflowArgs))
 			end
 		end;
 

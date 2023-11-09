@@ -364,11 +364,6 @@ return function(Vargs, GetEnv)
 	end;
 
 	local function RunAfterPlugins(data)
-		--// Backup Map
-		if Settings.AutoBackup then
-			TrackTask("Thread: Initial Map Backup", Admin.RunCommand, `{Settings.Prefix}backupmap`)
-		end
-
 		--// Run OnStartup Commands
 		for i,v in Settings.OnStartup do
 			print(`Running startup command {v}`)
